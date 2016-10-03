@@ -2,7 +2,7 @@ package ie.gmit.sw;
 
 public class CaesarCypher {
 	
-	public int key;
+	private int key;
 
 	public String encrypt(String plainText) throws CypherException{
 		return new String (encrypt(plainText.getBytes()));
@@ -11,7 +11,7 @@ public class CaesarCypher {
 	public byte[] encrypt(byte[] plainText) throws CypherException{
 		
 		for (int i = 0; i < plainText.length; i++) {
-			plainText[i] = (byte) (plainText[i] + key);//i assigned the value a byte, 
+			plainText[i] = (byte) (plainText[i] + getKey());//i assigned the value a byte, 
 		}
 		
 		return plainText;
@@ -25,7 +25,7 @@ public class CaesarCypher {
 	
 	public byte[] decrypt(byte[] cypherText) throws CypherException{
 		for (int i = 0; i < cypherText.length; i++) {
-			cypherText[i] = (byte) (cypherText[i] - key);//i assigned the value a byte, 
+			cypherText[i] = (byte) (cypherText[i] - getKey());//i assigned the value a byte, 
 		}
 		
 		return cypherText;
@@ -35,6 +35,12 @@ public class CaesarCypher {
 	protected void finalize() throws Throwable {
 		//out of scope before garbage collected
 		System.out.println("caesarCypher ("+ this +") is about to be GC'D"); // Garbage Collected
+	}
+	public int getKey() {
+		return key;
+	}
+	public void setKey(int key) {
+		this.key = key;
 	}
 
 }
